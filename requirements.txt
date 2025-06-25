@@ -1,0 +1,7 @@
+pandas
+numpy
+bokeh
+fastapi[all]
+uvicorn[standard] 
+openpyxl
+metatrader5
