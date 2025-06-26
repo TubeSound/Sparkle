@@ -29,22 +29,20 @@ export function RealTimeChartWindow<T extends Record<string, number>>({
     const yMax = height - margin.top - margin.bottom;
 
     useEffect(() => {
-        console.log("=== チャート受信データ（データ長） ===", data.length);
         console.log("=== チャート受信データ（先頭3件） ===", data.slice(0, 3));
         console.log("=== チャート受信データ（末尾3件） ===", data.slice(-3));
     }, [data]);
 
-    const lastTimestamp = data.length > 0 ? data[data.length - 1][xKey] : Date.now() / 1000;
-    const xStart = lastTimestamp - windowSeconds;
-    const xEnd = lastTimestamp;
+    const earliest = data.length > 0 ? data[0][xKey] : Date.now() / 1000;
+    const latest = data.length > 0 ? data[data.length - 1][xKey] : earliest;
+
+    let xStart = latest - windowSeconds;
+    if (xStart < earliest) {
+        xStart = earliest;
+    }
+    const xEnd = xStart + windowSeconds;
 
     const slicedData = data.filter(d => d[xKey] >= xStart && d[xKey] <= xEnd);
-
-    useEffect(() => {
-        console.log("=== 整形データ（データ長） ===", slicedData.length);
-        console.log("=== 整形データ（先頭3件） ===", slicedData.slice(0, 3));
-        console.log("=== 整形データ（末尾3件） ===", slicedData.slice(-3));
-    }, [slicedData]);
 
     const xScale = useMemo(() => {
         return scaleTime({
