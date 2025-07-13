@@ -1,19 +1,25 @@
 # Sparkle
-0. bokeh.jsインストール
- > npm install @bokeh/bokehjs   
+
 
 1. フロントエンド
 　
-(1) backend/main.pyファイルを作成
+(1) NextJSプロジェクト作成
+create-next-app@latest frontend --typescript --eslint --app
 
-(2) バックエンド起動
- >　uvicorn main:app --reload     
+(2) React Version Down for visx
+npm install react@18 react-dom@18
+
+(3) TailWindCssインストール
+npm install tailwindcss @tailwindcss/postcss postcss
+
+(4) インストール
+npm install @visx/visx d3-array
+
+(5) 起動
+npm run dev
 
 2. バックエンド
- (1) react + vite projectを作成
- > npm create vite@latest frontend -- --template react  
- > cd frontend
- > npm install
 
-(2) 起動
-> npm run dev
+ >　uvicorn main:app --reload     
+
+
