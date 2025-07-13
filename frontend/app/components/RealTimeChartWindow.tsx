@@ -122,7 +122,7 @@ export function RealTimeChartWindow<T extends Record<string, number>>({
                 />
                 <AxisLeft
                     scale={yScale}
-                    tickFormat={v => Math.round(v).toLocaleString()}
+                    tickFormat={v => Math.round(v as number).toLocaleString()}
                 />
             </g>
         </svg>
